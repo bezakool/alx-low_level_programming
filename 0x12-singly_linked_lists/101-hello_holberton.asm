@@ -1,13 +1,27 @@
-#include <stdio.h>
+; My comments: It is so fun to write in assembly language
+; File: 101-hello_holberton.asm
+; Auth: Firdaus H. Salim
+; Desc: 64-bit assembly program that prints
+;       Hello, Holberton followed by a new line.
 
-void first(void) __attribute__ ((constructor));
+extern printf
 
-/**
- * first - prints a sentence before the main
- * function is executed
- */
-void first(void)
-{
-	printf("You're beat! and yet, you must allow,\n");
-	printf("I bore my house upon my back!\n");
-}
+section .text
+   global main
+
+main:
+   push rbp
+
+   mov rdi,fmt
+   mov rsi,msg
+   mov rax,0
+   call printf
+
+   pop rbp
+
+   mov rax,0
+   ret
+
+section .data
+   msg: db "Hello, Holberton", 0
+   fmt: db "%s", 10, 0
